@@ -1,0 +1,35 @@
+provider "aws" {
+  region = "us-east-1"
+ 
+}
+
+provider "aws" {
+  region = "us-west-2"
+  alias  = "usa" 
+ 
+}
+
+
+resource "aws_instance" "instance_us_east" {
+  provider = aws.us_east_1
+
+  ami           = "0453ec754f44f9a4a"  
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "verginiaserver"
+  }
+}
+
+
+resource "aws_instance" "instance_us_west" {
+  provider = aws.us_west_2 
+
+  ami           = "055e3d4f0bbeb5878"  
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "oio server"
+  }
+}
+
